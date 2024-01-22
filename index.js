@@ -22,7 +22,12 @@ const notFoundMiddleware = require('./middlewares/not-found');
 const errorHandlerMiddleware = require('./middlewares/error-handler');
 
 
-app.use(cors());
+app.use(cors({
+      origin: 'http://localhost:3001', // Replace with your frontend's origin
+      methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+      credentials: true, // Enable credentials (if needed)
+      optionsSuccessStatus: 204, // Some legacy browsers (IE11, various SmartTVs) choke on 204
+    }))
 app.use(xss());
 
 app.use(express.json());
